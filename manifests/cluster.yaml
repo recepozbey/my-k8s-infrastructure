@@ -1,0 +1,27 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: test-db-cluster
+spec:
+  # Sunucuyu yormamak için 2 Pod (1 Ana, 1 Kopya) kullanıyoruz
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.14
+  instances: 2
+     
+  
+  postgresql:
+    parameters:
+      # Her bir pod için belirlediğimiz 1GB RAM'in %25'i
+      shared_buffers: "256MB" 
+      max_connections: "100"
+
+  resources:
+    requests:
+      memory: "512Mi" # Başlangıçta garanti edilen RAM
+      cpu: "500m"     # Yarım çekirdek garanti
+    limits:
+      memory: "1Gi"   # Pod başına MAKSİMUM 1 GB RAM
+      cpu: "1"        # Pod başına MAKSİMUM 1 Çekirdek
+      
+  storage:
+    # 20 GB toplam diskiniz var, OS payını düşünerek 5 veya 10 idealdir
+    size: 5Gi

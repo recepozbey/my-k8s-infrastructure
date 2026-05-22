@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-external-lb
+  namespace: default
+spec:
+  type: LoadBalancer # K3s otomatik olarak sunucu IP'sine bağlayacak
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+  selector:
+    # Trafiği sadece "test-db-cluster"ın ANA (Primary) poduna gönder
+    cnpg.io/cluster: test-db-cluster
+    role: primary
