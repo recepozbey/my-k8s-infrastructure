@@ -6,6 +6,20 @@ spec:
   # Sunucuyu yormamak için 2 Pod (1 Ana, 1 Kopya) kullanıyoruz
   imageName: ghcr.io/cloudnative-pg/postgresql:16.14
   instances: 2
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://postgres-backups/
+      endpointURL: http://minio-service.default.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio-creds
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: minio-creds
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+        maxParallel: 8
      
   
   postgresql:
