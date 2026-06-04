@@ -28,6 +28,7 @@ metadata:
   name: minio-service
   namespace: default
 spec:
+  type: LoadBalancer
   ports:
   - name: api
     port: 9000
