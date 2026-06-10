@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   # Cron formatı: Her gece saat 03:00'te çalışır
-  schedule: "19 15 * * *" 
+  schedule: "00 03 * * *" 
   backupOwnerReference: self
   cluster:
     name: test-db-cluster
