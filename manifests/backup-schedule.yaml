@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: daily-backup
+  namespace: default
+spec:
+  # Cron formatı: Her gece saat 03:00'te çalışır
+  schedule: "0 0 3 * * *" 
+  backupOwnerReference: self
+  cluster:
+    name: test-db-cluster
