@@ -7,6 +7,7 @@ spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:16.14
   instances: 2
   backup:
+    retentionPolicy: "10d"
     barmanObjectStore:
       destinationPath: s3://postgres-backups/
       endpointURL: http://minio-service.default.svc.cluster.local:9000
